@@ -49,13 +49,9 @@ def post_duck():
     new_duck = request.json
     #find the highest id of g.data['ducks']
     # duck_list = g.data['ducks']
-    id = [] 
-    for duck in g.data['ducks']:
-        id.append(duck['id'])
-    new_id = max(id) + 1
-    new_duck['id'] = new_id
-    duck_list = g.data['ducks']
-    duck_list.append(new_duck)
+    all_ids = [duck['id'] for duck in g.data['ducks']]
+    new_duck['id'] = max(all_ids) + 1 
+    g.data['ducks'].append(new_duck)
     return new_duck
 
     #add new id incremented by 1 to request.json
@@ -69,7 +65,7 @@ def delete_duck(id):
     # get duck by id
     # filter that duck out of the list
     # return the filtered list 
-    return jsonify(g.data['ducks'])
+    return {}
 
 
 if __name__ == "__main__":
